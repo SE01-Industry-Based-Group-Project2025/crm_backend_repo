@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full">
+
+<div class="min-h-full">
+    <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center">
+                    <div class="shrink-0">
+                        <img src="/img/genetic-data.svg" class="size-8" alt="Your Company">
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                            <a th:href="@{/}" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</a>
+                            <!--<a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
+                            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
+                            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
+                            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Reports</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
+    <header class="bg-white shadow-sm">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900" th:text="${customer.firstName+' '+customer.lastName}"></h1>
+        </div>
+    </header>
+    <main>
+        <div class="mx-auto max-w-7xl px-6 py-10">
+            <div class="overflow-hidden rounded-2xl shadow-lg border border-gray-300 bg-white">
+                <table class="table-auto w-full text-lg">
+                    <tbody>
+                    <tr class="bg-gray-100">
+                        <th class="uppercase text-left px-8 py-5 w-1/4 text-white bg-gray-800 rounded-tl-2xl">
+                            ID
+                        </th>
+                        <td class="px-8 py-5 text-gray-800" th:text="${customer.id}"></td>
+                    </tr>
+                    <tr>
+                        <th class="uppercase text-left px-8 py-5 bg-gray-800 text-white">First Name</th>
+                        <td class="px-8 py-5 text-gray-800" th:text="${customer.firstName}"></td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <th class="uppercase text-left px-8 py-5 bg-gray-800 text-white">Last Name</th>
+                        <td class="px-8 py-5 text-gray-800" th:text="${customer.lastName}"></td>
+                    </tr>
+                    <tr>
+                        <th class="uppercase text-left px-8 py-5 bg-gray-800 text-white">Email</th>
+                        <td class="px-8 py-5 text-gray-800" th:text="${customer.email}"></td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <th class="uppercase text-left px-8 py-5 bg-gray-800 text-white rounded-bl-2xl">
+                            Phone Number
+                        </th>
+                        <td class="px-8 py-5 text-gray-800 rounded-br-2xl" th:text="${customer.phone}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</div>
+</body>
+</html>
