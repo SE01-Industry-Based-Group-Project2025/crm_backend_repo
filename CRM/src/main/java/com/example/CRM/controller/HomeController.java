@@ -21,7 +21,7 @@ public class    HomeController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/")
+    @GetMapping("//")
     public String home(Model model) {
         List<Customer> customerList = customerService.getAllCustomer();
         model.addAttribute("customerList", customerList);
