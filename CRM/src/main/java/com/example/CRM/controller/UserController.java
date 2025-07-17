@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    // === SIGNUP ===
+    // SIGNUP
     @PostMapping("/signup")
     public String signup(@RequestBody User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
@@ -30,20 +30,23 @@ public class UserController {
             return "Password cannot be empty";
         }
 
-        // ✅ Set default role if not provided
-        if (user.getRole() == null || user.getRole().isEmpty()) {
-            user.setRole("ROLE_USER"); // 🔐 Important for Spring Security
+        if (user.getPlan() == null || user.getPlan().isEmpty()) {
+            return "Plan is required";
         }
 
-        // ✅ Hash the password before saving
+        // Set default role if not provided
+        if (user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole("ROLE_USER"); // Important for Spring Security
+        }
+
+        // Hash the password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
         return "User registered successfully";
     }
 
-
-    // === LOGIN ===
+    // LOGIN
     @PostMapping("/login")
     public String login(@RequestBody User loginRequest) {
         Optional<User> userOptional = userRepository.findByEmail(loginRequest.getEmail());
@@ -61,5 +64,4 @@ public class UserController {
 
         return "Login successful";
     }
-
 }

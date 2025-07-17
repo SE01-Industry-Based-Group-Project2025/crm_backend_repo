@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
 @Entity(name = "Customer")
-@Table (name = "customer")
+@Table (name = "mycustomer")
 public class Customer {
 
     @Id

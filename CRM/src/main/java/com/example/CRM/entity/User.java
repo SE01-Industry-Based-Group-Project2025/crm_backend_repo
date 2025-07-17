@@ -24,6 +24,8 @@ public class User {
     @Column(nullable = false)
     private String role = "ROLE_USER"; // Default role
 
+    private String plan; // New field for plan
+
     // --- Getters and Setters ---
 
     public Long getId() {
@@ -72,5 +74,8 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+    public String getPlan() {
+        return plan;
     }
 }
