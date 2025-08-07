@@ -3,9 +3,12 @@ package com.example.CRM.controller;
 import com.example.CRM.entity.User;
 import com.example.CRM.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -48,20 +51,28 @@ public class UserController {
 
     // LOGIN
     @PostMapping("/login")
-    public String login(@RequestBody User loginRequest) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody User loginRequest) {
         Optional<User> userOptional = userRepository.findByEmail(loginRequest.getEmail());
 
         if (userOptional.isEmpty()) {
-            return "Invalid email";
+            Map<String, Object> response = Map.of("message", "Invalid email");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
         User user = userOptional.get();
 
         // Use PasswordEncoder to check raw password against hashed password
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-            return "Invalid password";
+            Map<String, Object> response = Map.of("message", "Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
-        return "Login successful";
+        // Successful login
+        Map<String, Object> response = Map.of(
+                "message", "Login successful",
+                "role", user.getRole(),
+                "id", user.getId()
+        );
+        return ResponseEntity.ok(response);
     }
 }
