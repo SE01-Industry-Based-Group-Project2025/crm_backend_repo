@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+import com.example.CRM.model.Customer;
 @Service
 public class CustomerService {
+
 
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
@@ -31,6 +32,11 @@ public class CustomerService {
 
     public void deleteById(Long id){
         customerRepository.deleteById(id);
+    }
+
+
+    public Customer getCustomerById(Long userId) {
+        return customerRepository.findById(userId).orElse(null);
     }
 
 

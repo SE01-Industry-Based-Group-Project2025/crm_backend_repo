@@ -18,20 +18,19 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // disable CSRF for testing/dev
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/generate-report").permitAll() // allow PDF generation without login
+                        .requestMatchers("/", "/create", "/save", "/customer/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/user/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/api/signup", "/api/login").permitAll()
-                        .requestMatchers("/", "/create", "/save", "/customer/**").permitAll()
-                        .requestMatchers("/api/**").permitAll() // 👈 Allow public access to your dashboard
-
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")               // custom login page URL (you'll need to create this page)
-                        .defaultSuccessUrl("/profile")    // redirect here after successful login
-                        .permitAll()                      // allow everyone to access login page
+                        .loginPage("/login")             // your custom login page
+                        .defaultSuccessUrl("/profile")   // redirect after login
+                        .permitAll()
                 )
-                .logout(logout -> logout.permitAll()); // allow everyone to access logout
+                .logout(logout -> logout.permitAll());
 
         return http.build();
     }
@@ -41,16 +40,13 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Hardcoded in-memory user with username admin1 and password admin01
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-
         manager.createUser(User.withUsername("admin1@gmail.com")
                 .password(passwordEncoder.encode("admin01"))
                 .roles("ADMIN")
                 .build());
-
         return manager;
     }
 }

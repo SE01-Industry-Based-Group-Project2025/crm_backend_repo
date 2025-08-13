@@ -1,10 +1,11 @@
 package com.example.CRM.model;
 
-
+import com.example.CRM.model.Customer;  // import your Customer class here
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import com.example.CRM.model.Customer;  // import your Customer class here
 
 @Entity(name = "Customer")
 @Table (name = "mycustomer")

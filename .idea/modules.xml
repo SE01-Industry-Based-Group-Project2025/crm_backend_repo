@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BackEnd - user_managCRUD_Done_C(2) - security.iml" filepath="$PROJECT_DIR$/.idea/BackEnd - user_managCRUD_Done_C(2) - security.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CRM/CRM.iml" filepath="$PROJECT_DIR$/CRM/CRM.iml" />
     </modules>
   </component>
 </project>
